@@ -1,0 +1,9 @@
+{
+    "app": {
+        "port": 80
+    },
+    "SES": {
+        "accessKey": "AKIAIJUQBVSSUJGLXOJQ",
+        "secretKey": "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"
+    }
+}

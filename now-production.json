@@ -1,0 +1,8 @@
+{
+    "name": "vocalist-api",
+    "type": "npm",
+    "alias": ["api.vocalist.online"],
+    "env": {
+        "NODE_ENV": "production"
+    }
+}

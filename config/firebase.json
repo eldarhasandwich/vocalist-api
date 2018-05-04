@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "project-babel-datastore",
+    "private_key_id": "a5fd7a1061cf9013d1dfbf01040177ceb3c6015f",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCmfws5IwAxDsgv\nQ3RLv29U/zcFqw42QsR7XALDD0zPS0vIcGm4O3r2SMjTWXxBf1Jgc4kJDC9yEHDX\nx04qo5Yhk42BaXXxeLMXEBnn8kMKxaLo+tANOTu61LY0mL729aY2dQsx65man5u2\nQe9D8K900f/dir63OjF8ZcqyRDDO17wkxWA43j9Q7YpAYsxfmLSL31oO4jMB6+0O\n3asLWdqMi4jt/s5tBf1HI5M7AZdMf+efY34YFu0OFf0x6SgP5eDg6tYrhwI1lmKY\nVEpne0Hv+0eBC5CKVNtTVH3OKvbL6jLM74q7coIM9KPI5nTk1IDk0H/qYhXHGGby\nn5Z22DnrAgMBAAECggEAKQv3G136pR2M0sIhgK8wZlcJHJegSFZLlFIJyEcUW6Kn\ni0HTfn0DgoZNJHXSQV9/UpIJPbbIV6mf+EKFjdOIprx2zWnPjvl/xXbNvDYouxYg\nZKm48xmiFRxt0ye5JK9JC/HtEaCQ3OLug49bynci+nzvRJH5FLj/DDkYMLzI/6Uf\n8RCWrZRS8RN/gvFdyJYmT9NZNWjM93A9DWuCooBMcbJu/Z6vRisUDnMAGcCJGAWg\nsz00GSYVH6WijXgSUWyd1FvmcyQGcNOAfZsYD4M/RO53YyQySIWrs1Ggo8dbfISO\n/0vJ9e7dXb5BZa0adqNthPkrRxwHrjAQzdrlz2VZYQKBgQDgeCUMqiZB8msXI+3H\nEGRGL9SnYflrjBigDISG5XEEQsywRDjkaBrm4WBHReaJ+iMBMTMhIAHuS1WZZrkz\n71Akd894OSSnGGp58NrJCTuw8leQ635RjxeycTaVorJwvfjMnRbH4EOLFg4s+UWI\n21cm0bXmQMrNSwILB1hLr7yMMQKBgQC94jQ9NswivXV2s2z53tIV8o3n6rf42AbJ\nqdj9ZGbBHq6YRSpev4eQgL7FtfB24o1vsZPEMMlliFo4nZ/Z3XPjV0k9ate1BKUl\nZoC4SqC+inxVo0OL4RysxfS2OK9nppqwlEnfBC0PAb5wSMCHlj0BNlC8rKjv8Sqj\n4tqanRoM2wKBgQC8HZQXIAU94TZER1T/LcqLU4xo1l/b9KWyg6sRDfn/8ydtVU9E\ng8Z/1UMFmBwTZ/CsEBpkWVmk5beP/pmZX6aPWWUiwOjprDmXhfUk47sFmKMwDVto\naH4Yim6PSrE2cM6wU7oCufyA9HPe1uyiPAe2vasukwAiugi1S2uAyn8+EQKBgFdc\nYzxmobS6Bfj+w/ySD4YZekBhNRNAEJ9njXXHY58mRp239K5y4CQTl7HO6ztHMFtb\nD+kLqR0VhqzVmF3cDR1jY0bmiSe3Y2O5rS8c5qfDf0DHRKRuhYrX6KaNneXKORFU\nqEf62+AzpTJzxmCbNqYAH1Uu+uqpwjx0eq736KxRAoGBAKZn0WCBow9h5jhCCzV/\ntMGTBOEgg2Fas0ju4lDod1mmlOdSbbZgkbnrAo+pTp0dUxFgl4yDPMlchEQQ25gD\n6vYdBZTPtdmnPnwbN8IVy4dncHEZ/b4vTExn0+Dg3e7bJCJq+qChLJkAFtM1nK5S\n1jNVECYA7zze7uTh4ulnLwaa\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-46tcq@project-babel-datastore.iam.gserviceaccount.com",
+    "client_id": "100292265125809466855",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-46tcq%40project-babel-datastore.iam.gserviceaccount.com"
+  }
+  

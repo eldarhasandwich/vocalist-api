@@ -33,6 +33,11 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.use(function (req, res, next) {
+    if (req.path.split('/')[1] === "attendee") {
+        next()
+        return
+    }
+
     let token = req.get('authorization')
 
     if (!token) {
@@ -109,30 +114,48 @@ app.post('/email/send', function (req, res) {
 })
 
 app.get('/attendee/load', function (req, res) {
+    // console.log(req)
 
-    console.log("Recieved attendee key load request from " + req.body.attendeeID)
+    console.log("Recieved attendee key load request from " + req.query.attID)
 
-    let c = req.body.compID;
-    let l = req.body.listID
-    let a = req.body.attendeeID
+    let c = req.query.compID;
+    let l = req.query.listID
+    let a = req.query.attID
 
     var db = admin.database()
     var ref = db.ref(`_COMPANIES/${c}/_LISTS/${l}/_ATTENDEES/${a}`)
     ref.once("value", function(snapshot) {
+        let v = snapshot.val()
+        if (!v) {
+            console.log("No attendee")
+            res.end(null)
+            return
+        }
 
-        res.end(snapshot.val())
-
+        console.log("Found attendee: " + v.name)
+        res.json(v)
     })
 })
 
-app.post('attendee/uploadaudio', function (req, res) {
+app.post('/attendee/uploadaudio', function (req, res) {
+    // console.log(req)
 
-    console.log("Recieved attendee audio upload request from " + req.body.attendeeID)
+    console.log("Recieved attendee audio upload request from " + req.body.attID)
 
-    let c = req.body.compID;
+    let c = req.body.compID
     let l = req.body.listID
-    let a = req.body.attendeeID
+    let a = req.body.attID
 
+    console.log(c)
+    console.log(l)
+    console.log(a)
+
+    var db = admin.database()
+    var ref = db.ref(`_COMPANIES/${c}/_LISTS/${l}/_ATTENDEES/${a}`)
+    ref.update({audioStatus: "Unverified", awaitingResponse: false})
+
+
+    res.end("success")
 
 
 })
