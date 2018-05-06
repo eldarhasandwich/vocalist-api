@@ -1,3 +1,5 @@
+const path = require('path')
+
 const admin = require("firebase-admin");
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -63,16 +65,6 @@ app.get('/', function (req, res) {
     res.end('hello')
 })
 
-function getInitialRequestEmailTemplate (attendeeEmail, accessLink) {
-
-    return {
-        from: 'VocalistEmailer@vocalist.online',
-        to: attendeeEmail,
-        subject: "Give name",
-        body: `Copy and use this link to access your upload portal: ${accessLink}`,
-        html: `<p>Click here to access your upload portal!</p> <a href=${accessLink}>Click Here!</a>`
-    }
-}
 
 app.post('/email/send', function (req, res) {
 
@@ -92,7 +84,7 @@ app.post('/email/send', function (req, res) {
         for (let userId in attendees) {
             let accessLink = `upload.vocalist.online/?k=${req.user.uid}~${listID}~${userId}`
             let attendeeEmail = attendees[userId].contactEmail
-            let e = getInitialRequestEmailTemplate(attendeeEmail, accessLink)
+            let e = EmailTemplates.getInitialRequestEmailTemplate(attendeeEmail, accessLink)
 
             if (userIDs && !userIDs.includes(userId)) {
                 continue
@@ -106,6 +98,18 @@ app.post('/email/send', function (req, res) {
                 subject: e.subject,
                 text: e.text,
                 html: e.html
+            }, (error, info) => {
+                if (error) {
+                    return console.log(error)
+                }
+                console.log('Email sent')
+                console.log(req.user.uid)
+                console.log(listID)
+                console.log(userId)
+
+                var db = admin.database()
+                var ref = db.ref(`_COMPANIES/${req.user.uid}/_LISTS/${listID}/_ATTENDEES/${userId}`)
+                ref.update({awaitingResponse: true})
             })
         }
 
