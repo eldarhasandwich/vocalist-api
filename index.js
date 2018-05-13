@@ -74,43 +74,62 @@ app.post('/email/send', function (req, res) {
     let userIDs = req.body.userIDs
 
     var db = admin.database()
-    console.log(req.user.uid)
-    console.log(listID)
     var ref = db.ref("_COMPANIES/" + req.user.uid + "/_LISTS/" + listID)
     ref.once("value", function(snapshot) {
 
         let attendees = snapshot.val()._ATTENDEES
 
         for (let userId in attendees) {
-            let accessLink = `upload.vocalist.online/?k=${req.user.uid}~${listID}~${userId}`
             let attendeeEmail = attendees[userId].contactEmail
-            let e = EmailTemplates.getInitialRequestEmailTemplate(attendeeEmail, accessLink)
-
+            let accessLink = `upload.vocalist.online/?k=${req.user.uid}~${listID}~${userId}`
+            
             if (userIDs && !userIDs.includes(userId)) {
                 continue
             }
 
+            let template = null
+            
+            switch (req.body.emailType) {
+                case "initial_audio_request": {
+                    console.log("emailType: audio init request")
+                    template = EmailTemplates.getInitialRequestEmailTemplate(attendeeEmail, accessLink)
+                }
+                case "replacement_audio_request": {
+                    console.log("emailType: audio replace")
+                    template = EmailTemplates.getAudioReplaceEmailTemplate(attendeeEmail, accessLink, req.body.replacementReason)
+                }
+                default: {
+                    console.log("emailType not defined")
+                }
+            }
+            
             console.log("Sending Email to " + attendeeEmail)
 
-            transporter.sendMail({
-                from: e.from,
-                to: e.to,
-                subject: e.subject,
-                text: e.text,
-                html: e.html
-            }, (error, info) => {
-                if (error) {
-                    return console.log(error)
-                }
-                console.log('Email sent')
-                console.log(req.user.uid)
-                console.log(listID)
-                console.log(userId)
+            if (!attendees[userId].awaitingResponse) {
+                transporter.sendMail({
+                    from: template.from,
+                    to: template.to,
+                    subject: template.subject,
+                    text: template.text,
+                    html: template.html
+                }, (error, info) => {
+                    if (error) {
+                        return console.log(error)
+                    }
+                    console.log('Email sent')
+                    // console.log(req.user.uid)
+                    // console.log(listID)
+                    // console.log(userId)
+    
+                    var db = admin.database()
+                    var ref = db.ref(`_COMPANIES/${req.user.uid}/_LISTS/${listID}/_ATTENDEES/${userId}`)
+                    ref.update({awaitingResponse: true})
+                })
 
-                var db = admin.database()
-                var ref = db.ref(`_COMPANIES/${req.user.uid}/_LISTS/${listID}/_ATTENDEES/${userId}`)
-                ref.update({awaitingResponse: true})
-            })
+            } else {
+                console.log("This attendee is marked as awaitingResponse, not sending email.")
+            }
+
         }
 
     })
